@@ -18,5 +18,5 @@ async def get_flash():
         "message": strava.get_flash(df)
     }
 
-# if __name__ == "__main__":
-#     uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)

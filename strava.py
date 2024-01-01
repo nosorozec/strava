@@ -10,9 +10,9 @@ import os
 def get_access_token() -> str:
     urllib3.disable_warnings()
 
-    client_id:int=os.environ.get("CLIENT_ID")
-    client_secret:str=os.environ.get("CLIENT_SECRET")
-    refresh_token:str=os.environ.get("REFRESH_TOKEN")
+    client_id:int=os.environ.get("CLIENT_ID") or exit('exitting - no CLIENT_ID in os env')
+    client_secret:str=os.environ.get("CLIENT_SECRET")  or exit('exitting - no CLIENT_SECRET in os env')
+    refresh_token:str=os.environ.get("REFRESH_TOKEN") or exit('exitting - no REFRESH_TOKEN in os env')
 
     auth_endpoint:str = "https://www.strava.com/oauth/token"
     payload:dict = {

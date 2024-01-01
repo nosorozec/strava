@@ -22,7 +22,7 @@ version: '3'
 services:
 
   strava-service:
-    image: ludw-strava
+    image: ludw/ludw-strava:latest
     container_name: strava
     environment:
       - CLIENT_ID=${CLIENT_ID}

@@ -1,5 +1,7 @@
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
+import io
+
 import strava
 
 app = FastAPI()
@@ -18,5 +20,15 @@ async def get_flash():
         "message": strava.get_flash(df)
     }
 
+@app.get("/suffer")
+async def get_suffer():
+    access_token = strava.get_access_token()
+    df = strava.get_strava_df(access_token)
+    
+    buf = io.BytesIO()
+    buf = strava.plot_suffer_score(df)
+
+    return Response(buf.getvalue(), media_type='image/png')
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=5001, reload=True)

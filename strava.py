@@ -6,6 +6,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import urllib3
 import os
+import io
 
 def get_access_token() -> str:
     urllib3.disable_warnings()
@@ -73,7 +74,7 @@ def get_strava_df(access_token:str) -> pd.pandas.core.frame.DataFrame:
 
     return df
 
-def plot_suffer_score(df:pd.pandas.core.frame.DataFrame) -> None:
+def plot_suffer_score(df:pd.pandas.core.frame.DataFrame) -> io.BufferedIOBase:
 
     #suffer score
     #df[['sport_type', 'suffer_score']].groupby('sport_type').count().plot.bar()
@@ -87,7 +88,14 @@ def plot_suffer_score(df:pd.pandas.core.frame.DataFrame) -> None:
     ax.boxplot([ride, vride, swim])
     ax.set_title('Suffer score')
     plt.xticks([1, 2, 3], ['Ride', 'VRide', 'Swim'])
-    plt.show()
+    
+    # https://stackoverflow.com/questions/73754664/how-to-display-a-matplotlib-chart-with-fastapi-nextjs-without-saving-the-chart
+    # wrucamy wykres to tablicy bajtów
+    buf = io.BytesIO()
+    plt.savefig(buf, format="png")
+    return buf
+
+    
 
 def get_flash(df:pd.pandas.core.frame.DataFrame) -> str:
     forecast = {}

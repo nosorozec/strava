@@ -3,6 +3,7 @@ from fastapi import FastAPI, Response
 import io
 
 import strava
+import finance
 
 app = FastAPI()
 
@@ -30,5 +31,13 @@ async def get_suffer():
 
     return Response(buf.getvalue(), media_type='image/png')
 
+
+@app.get("/eur")
+async def get_eur():
+    buf = io.BytesIO()
+    buf = finance.get_eur_chart()
+    return Response(buf.getvalue(), media_type='image/png')
+
+
 if __name__ == "__main__":
-    uvicorn.run("main:app", root_path="/strava", host="0.0.0.0", port=5000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=5001, reload=True)

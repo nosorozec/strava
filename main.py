@@ -32,7 +32,7 @@ async def get_suffer(btasks: BackgroundTasks):
     return Response(buf.getvalue(), media_type='image/png')
 
 
-@app.get("/eur")
+@app.get("/currency")
 async def get_eur(btasks: BackgroundTasks):
     buf = io.BytesIO()
     buf = finance.get_eur_chart()

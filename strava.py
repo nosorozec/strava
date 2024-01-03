@@ -96,6 +96,9 @@ def plot_suffer_score(df:pd.pandas.core.frame.DataFrame) -> io.BufferedIOBase:
     # wrucamy wykres to tablicy bajtów
     buf = io.BytesIO()
     plt.savefig(buf, format="png")
+    plt.close()
+    
+    buf.seek(0)
     return buf
 
     

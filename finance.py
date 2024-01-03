@@ -10,8 +10,6 @@ def get_eur_chart() -> io.BufferedIOBase:
     payload = {}
     response = requests.request("GET", url, data=payload)
 
-    print(response.status_code)
-
     df = pd.DataFrame.from_dict(response.json()['rates'])
     df['effectiveDate'] = pd.to_datetime(df['effectiveDate'], format="%Y-%m-%d")
 
@@ -20,4 +18,5 @@ def get_eur_chart() -> io.BufferedIOBase:
     plt.xlabel("Days")
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
+    buf.seek(0)
     return buf

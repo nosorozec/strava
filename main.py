@@ -36,9 +36,9 @@ async def get_suffer():
 async def get_eur(btasks: BackgroundTasks):
     buf = io.BytesIO()
     buf = finance.get_eur_chart()
-    btasks.add_task(buf.close)
-    buf.seek(0)
-    return Response(buf.getvalue(), media_type='image/png')
+    image_data = buf.getvalue()
+    btasks.add_task(buf.close())
+    return Response(image_data, media_type='image/png')
 
 
 if __name__ == "__main__":

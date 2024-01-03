@@ -15,8 +15,9 @@ def get_eur_chart() -> io.BufferedIOBase:
     df = pd.DataFrame.from_dict(response.json()['rates'])
     df['effectiveDate'] = pd.to_datetime(df['effectiveDate'], format="%Y-%m-%d")
 
-    plt.plot(np.linspace(-last+1, 0, last), df['mid'])
-    
+    plt.plot(np.linspace(-last+1, 0, last), df['mid'], color='blue')
+    plt.title("EUR/PLN")
+    plt.xlabel("Days")
     buf = io.BytesIO()
-    plt.savefig(buf, format="png")
+    plt.savefig(buf, format='png')
     return buf

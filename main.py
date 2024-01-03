@@ -1,5 +1,5 @@
 import uvicorn
-from fastapi import FastAPI, Response
+from fastapi import FastAPI, Response, BackgroundTasks
 import io
 
 import strava
@@ -33,9 +33,11 @@ async def get_suffer():
 
 
 @app.get("/eur")
-async def get_eur():
+async def get_eur(btasks: BackgroundTasks):
     buf = io.BytesIO()
     buf = finance.get_eur_chart()
+    btasks.add_task(buf.close)
+    buf.seek(0)
     return Response(buf.getvalue(), media_type='image/png')
 
 

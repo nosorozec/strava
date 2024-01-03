@@ -1,8 +1,11 @@
 import requests
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
 import io
+
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 def get_eur_chart() -> io.BufferedIOBase:
     last=100

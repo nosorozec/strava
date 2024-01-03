@@ -3,10 +3,13 @@ import time
 import datetime as dt
 from dateutil.relativedelta import relativedelta
 import pandas as pd
-import matplotlib.pyplot as plt
 import urllib3
 import os
 import io
+
+import matplotlib
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 def get_access_token() -> str:
     urllib3.disable_warnings()

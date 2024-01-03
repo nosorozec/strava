@@ -22,13 +22,13 @@ async def get_flash():
     }
 
 @app.get("/suffer")
-async def get_suffer():
+async def get_suffer(btasks: BackgroundTasks):
     access_token = strava.get_access_token()
     df = strava.get_strava_df(access_token)
     
     buf = io.BytesIO()
     buf = strava.plot_suffer_score(df)
-
+    btasks.add_task(buf.close)
     return Response(buf.getvalue(), media_type='image/png')
 
 
@@ -36,9 +36,9 @@ async def get_suffer():
 async def get_eur(btasks: BackgroundTasks):
     buf = io.BytesIO()
     buf = finance.get_eur_chart()
-    image_data = buf.getvalue()
-    btasks.add_task(buf.close())
-    return Response(image_data, media_type='image/png')
+    
+    btasks.add_task(buf.close)
+    return Response(buf.getvalue(), media_type='image/png')
 
 
 if __name__ == "__main__":

@@ -32,5 +32,6 @@ def get_eur_chart() -> io.BufferedIOBase:
     
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
+    plt.close()
     buf.seek(0)
     return buf

@@ -38,7 +38,7 @@ async def get_eur(btasks: BackgroundTasks):
     buf = finance.get_eur_chart()
     
     btasks.add_task(buf.close)
-    return Response(buf.getvalue(), media_type='image/png')
+    return Response(content=buf.getvalue(), media_type='image/png')
 
 
 if __name__ == "__main__":

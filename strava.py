@@ -91,6 +91,7 @@ def plot_suffer_score(df:pd.pandas.core.frame.DataFrame) -> io.BufferedIOBase:
     ax.boxplot([ride, vride, swim])
     ax.set_title('Suffer score')
     plt.xticks([1, 2, 3], ['Ride', 'VRide', 'Swim'])
+    plt.grid(axis='y', which='major')
     
     # https://stackoverflow.com/questions/73754664/how-to-display-a-matplotlib-chart-with-fastapi-nextjs-without-saving-the-chart
     # wrucamy wykres to tablicy bajtów
@@ -109,7 +110,7 @@ def get_flash(df:pd.pandas.core.frame.DataFrame) -> str:
     flash = {}
 
     flash['current_year'] = dt.datetime.today().year
-    flash['days_in_current_year'] = 365 if flash['current_year'] % 4 else 365 #zakładam, że do 2100 roku nie dożyję :)
+    flash['days_in_current_year'] = 366 if flash['current_year'] % 4 else 365 #zakładam, że do 2100 roku nie dożyję :)
     flash['number_of_days_passed_this_year'] = (dt.datetime.today() - dt.datetime(flash['current_year'],1,1)).days + 1
     flash['percent_of_days_passed_this_year'] = round(flash['number_of_days_passed_this_year']/flash['days_in_current_year'] * 100,2)
     flash['activities_year_2_date'] = len(df)

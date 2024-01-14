@@ -5,3 +5,4 @@ fastapi
 requests
 python-dateutil
 matplotlib
+scipy

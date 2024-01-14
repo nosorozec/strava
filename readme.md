@@ -1,10 +1,16 @@
 # Description
 
-simply wrapper around the strava API
+simply wrapper around the different APIs
+
+## strava
+
 + [Get Your Strava Activity Data using Python (2023)](https://medium.com/@lejczak.learn/get-your-strava-activity-data-using-python-2023-️-b03b176965d0)+ https://developers.strava.com/docs/reference/
 + https://developers.strava.com/docs/authentication/
 
-# Docker
+## finance
++ currency rates from nbp.pl
+
+# How to use it
 
 1. Build docker image locally
 ```sh

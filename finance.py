@@ -7,7 +7,7 @@ import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
-def get_eur_chart() -> io.BufferedIOBase:
+def get_cur_chart() -> io.BufferedIOBase:
     currencies = [
         {"symbol":'GBP', "color":'black'},
         {"symbol":'CHF', "color":'red'},
